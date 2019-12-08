@@ -8,6 +8,8 @@ using UnityEngine.Events;
 /// </summary>
 public class MainApp : MonoBehaviour
 {
+    public Camera camera;
+
     /// <summary>
     /// The prefab of the Game to execute
     /// </summary>
@@ -25,6 +27,13 @@ public class MainApp : MonoBehaviour
     /// Notifies when the State of the MainApp changed.
     /// </summary>
     public StateChangedEvent OnStateChanged = new StateChangedEvent();
+
+    public static MainApp instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
