@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CatGrabsItemsGame : BaseGame
 {
@@ -9,6 +10,11 @@ public class CatGrabsItemsGame : BaseGame
 
     public CatController catPrefab;
     protected CatController catInstance;
+
+    public int numTargets = 1;
+    public int catchedTargets = 0;
+
+    public UnityEvent OnTargetCatched = new UnityEvent();
 
     public override GameOperation LoadGame()
     {
@@ -33,10 +39,22 @@ public class CatGrabsItemsGame : BaseGame
         return operation;
     }
 
+    protected void TargetCatched()
+    {
+        OnTargetCatched.Invoke();
+        catchedTargets++;
+        if (catchedTargets == numTargets )
+        {
+            QuitGame();
+        }
+
+    }
+
     protected IEnumerator CRDummyLoad(GameOperation operation)
     {
         yield return new WaitForSeconds(1.0f);
         mapInstance = GameObject.Instantiate(mapPrefab);
+        SetupTargets();
 
         catInstance = GameObject.Instantiate(catPrefab);
         catInstance.transform.SetParent(mapInstance.transform);
@@ -46,6 +64,16 @@ public class CatGrabsItemsGame : BaseGame
         mapInstance.mapRaycastController.onRayCastHit.AddListener(catInstance.MoveTo);
 
         operation.isDone = true;
+    }
+
+    protected void SetupTargets()
+    {
+        numTargets = mapInstance.targets.Length;
+        catchedTargets = 0;
+        for (int i = 0; i < mapInstance.targets.Length; i++)
+        {
+            mapInstance.targets[i].OnCatchedByCat.AddListener(TargetCatched);
+        }
     }
 
     protected IEnumerator CRDummyUnload(GameOperation operation)
@@ -58,7 +86,7 @@ public class CatGrabsItemsGame : BaseGame
 
     protected IEnumerator CRFinishGameEnd()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(100.0f);
         QuitGame();
     }
 }
