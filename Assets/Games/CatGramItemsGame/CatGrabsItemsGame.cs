@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CatGramItemsGame : BaseGame
+public class CatGrabsItemsGame : BaseGame
 {
     public MapController mapPrefab;
     protected MapController mapInstance;
