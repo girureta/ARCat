@@ -43,6 +43,24 @@ public class MainApp : MonoBehaviour
         OnStateChanged.Invoke(newState);
     }
 
+    private void Update()
+    {
+        switch (state)
+        {
+            case State.WaitingForARTarget:
+                OnWaitingForARTarget();
+                break;
+        }
+    }
+
+    protected void OnWaitingForARTarget()
+    {
+        if (GroundPlaneHelper.isTracked)
+        {
+            ChangeState(State.WaitingForUser);
+        }
+    }
+
     [System.Serializable]
     public enum State
     {
