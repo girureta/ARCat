@@ -15,6 +15,11 @@ public class MainAppUI : MonoBehaviour
     /// </summary>
     public PanelController initialPanel;
 
+    /// <summary>
+    /// The panel to let the user know the should point the phone into the ground plane marker.
+    /// </summary>
+    public PanelController ARTargetPanel;
+
     private void OnEnable()
     {
         mainApp.OnStateChanged.AddListener(OnMainAppStateChanged);
@@ -38,8 +43,10 @@ public class MainAppUI : MonoBehaviour
                 break;
             case MainApp.State.WaitingForARTarget:
                 initialPanel.Disable();
+                ARTargetPanel.Enable();
                 break;
             case MainApp.State.WaitingForUser:
+                ARTargetPanel.Disable();
                 break;
             case MainApp.State.RunningGame:
                 break;
