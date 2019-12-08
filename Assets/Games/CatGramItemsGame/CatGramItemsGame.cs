@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class CatGramItemsGame : BaseGame
 {
-    public GameObject mapPrefab;
-    protected GameObject mapInstance;
-    
+    public MapController mapPrefab;
+    protected MapController mapInstance;
+
+    public CatController catPrefab;
+    protected CatController catInstance;
+
     public override GameOperation LoadGame()
     {
         GameOperation operation = new GameOperation();
@@ -34,6 +37,12 @@ public class CatGramItemsGame : BaseGame
     {
         yield return new WaitForSeconds(1.0f);
         mapInstance = GameObject.Instantiate(mapPrefab);
+
+        catInstance = GameObject.Instantiate(catPrefab);
+        catInstance.transform.SetParent(mapInstance.transform);
+        catInstance.transform.position = mapInstance.characterSpawnPoint.position;
+        catInstance.transform.rotation = mapInstance.characterSpawnPoint.rotation;
+
         operation.isDone = true;
     }
 
@@ -47,7 +56,7 @@ public class CatGramItemsGame : BaseGame
 
     protected IEnumerator CRFinishGameEnd()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1.0f);
         QuitGame();
     }
 }

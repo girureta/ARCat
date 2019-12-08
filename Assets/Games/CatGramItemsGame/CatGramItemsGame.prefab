@@ -46,5 +46,7 @@ MonoBehaviour:
   OnGameFinished:
     m_PersistentCalls:
       m_Calls: []
-  mapPrefab: {fileID: 3358621160358687613, guid: 6bebca1e6db826647be506b7def75118,
+  mapPrefab: {fileID: -4238016257862410433, guid: 6bebca1e6db826647be506b7def75118,
+    type: 3}
+  catPrefab: {fileID: 3986830486149069973, guid: 0d94afd3b03b4f34fa7d060737ebd1ae,
     type: 3}
