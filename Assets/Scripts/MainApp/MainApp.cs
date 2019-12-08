@@ -91,7 +91,6 @@ public class MainApp : MonoBehaviour
     protected void OnGameFinished()
     {
         gameInstance.OnGameFinished.RemoveListener(OnGameFinished);
-        gameInstance.QuitGame();
         Destroy(gameInstance.gameObject);
         ChangeState(State.WaitingForUser);
     }
