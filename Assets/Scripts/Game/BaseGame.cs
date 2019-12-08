@@ -44,6 +44,11 @@ public abstract class BaseGame : MonoBehaviour
     public UnityEvent OnGameFinished = new UnityEvent();
 
     /// <summary>
+    /// Indicates when the games was loaded
+    /// </summary>
+    public UnityEvent OnGameLoaded = new UnityEvent();
+
+    /// <summary>
     /// Indicates the status of an async operation in the game.
     /// </summary>
     public class GameOperation
