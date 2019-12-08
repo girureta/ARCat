@@ -9,4 +9,6 @@ public class MapController : MonoBehaviour
     /// Where the character should spawn from.
     /// </summary>
     public Transform characterSpawnPoint;
+
+    public MapRaycastController mapRaycastController;
 }
