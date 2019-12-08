@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6647490199435570684}
   - component: {fileID: -8473485631772018931}
   m_Layer: 0
-  m_Name: CatGramItemsGame
+  m_Name: CatGrabsItemsGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,5 +46,7 @@ MonoBehaviour:
   OnGameFinished:
     m_PersistentCalls:
       m_Calls: []
-  mapPrefab: {fileID: 3358621160358687613, guid: 6bebca1e6db826647be506b7def75118,
+  mapPrefab: {fileID: -4238016257862410433, guid: 6bebca1e6db826647be506b7def75118,
+    type: 3}
+  catPrefab: {fileID: 3986830486149069973, guid: 0d94afd3b03b4f34fa7d060737ebd1ae,
     type: 3}
