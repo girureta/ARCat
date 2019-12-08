@@ -11,4 +11,6 @@ public class MapController : MonoBehaviour
     public Transform characterSpawnPoint;
 
     public MapRaycastController mapRaycastController;
+
+    public FishTargetController[] targets;
 }
