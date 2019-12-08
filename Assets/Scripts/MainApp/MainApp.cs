@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
@@ -7,6 +8,14 @@ using UnityEngine.Events;
 /// </summary>
 public class MainApp : MonoBehaviour
 {
+    /// <summary>
+    /// The prefab of the Game to execute
+    /// </summary>
+    public BaseGame game;
+
+    protected BaseGame gameInstance;
+    protected BaseGame.GameOperation gameLoadingOperation;
+
     /// <summary>
     /// The current state of the MainApp.
     /// </summary>
@@ -33,6 +42,19 @@ public class MainApp : MonoBehaviour
         }
     }
 
+    public void StartGame()
+    {
+        if (state == State.WaitingForUser)
+        {
+            gameInstance = GameObject.Instantiate(game);
+            gameInstance.transform.position = Vector3.zero;
+            gameInstance.transform.rotation = Quaternion.identity;
+
+            gameLoadingOperation = gameInstance.LoadGame();
+            ChangeState(State.LoadingGame);
+        }
+    }
+
     /// <summary>
     /// Changes the State of the MainApp and triggers the corresponding callback.
     /// </summary>
@@ -50,7 +72,28 @@ public class MainApp : MonoBehaviour
             case State.WaitingForARTarget:
                 OnWaitingForARTarget();
                 break;
+            case State.LoadingGame:
+                OnLoadingGame();
+                break;
         }
+    }
+
+    protected void OnLoadingGame()
+    {
+        if (gameLoadingOperation.isDone)
+        {
+            gameInstance.OnGameFinished.AddListener(OnGameFinished);
+            gameInstance.StartGame();
+            ChangeState(State.RunningGame);
+        }
+    }
+
+    protected void OnGameFinished()
+    {
+        gameInstance.OnGameFinished.RemoveListener(OnGameFinished);
+        gameInstance.QuitGame();
+        Destroy(gameInstance.gameObject);
+        ChangeState(State.WaitingForUser);
     }
 
     protected void OnWaitingForARTarget()
@@ -67,6 +110,7 @@ public class MainApp : MonoBehaviour
         Started,
         WaitingForARTarget,
         WaitingForUser,
+        LoadingGame,
         RunningGame,
     }
 

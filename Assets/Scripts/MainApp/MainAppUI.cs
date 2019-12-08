@@ -51,7 +51,8 @@ public class MainAppUI : MonoBehaviour
                 ARTargetPanel.Disable();
                 startGamePanel.Enable();
                 break;
-            case MainApp.State.RunningGame:
+            case MainApp.State.LoadingGame:
+                startGamePanel.Disable();
                 break;
             default:
                 break;
@@ -65,6 +66,11 @@ public class MainAppUI : MonoBehaviour
     public void OnAppAcknowledged()
     {
         mainApp.AppAcknowledged();
+    }
+
+    public void OnUserStartGame()
+    {
+        mainApp.StartGame();
     }
 
 }
