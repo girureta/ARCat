@@ -43,6 +43,8 @@ public class CatGramItemsGame : BaseGame
         catInstance.transform.position = mapInstance.characterSpawnPoint.position;
         catInstance.transform.rotation = mapInstance.characterSpawnPoint.rotation;
 
+        mapInstance.mapRaycastController.onRayCastHit.AddListener(catInstance.MoveTo);
+
         operation.isDone = true;
     }
 
