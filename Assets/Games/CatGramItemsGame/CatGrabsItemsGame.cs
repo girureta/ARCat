@@ -41,13 +41,12 @@ public class CatGrabsItemsGame : BaseGame
 
     protected void TargetCatched()
     {
-        OnTargetCatched.Invoke();
         catchedTargets++;
+        OnTargetCatched.Invoke();
         if (catchedTargets == numTargets )
         {
             QuitGame();
         }
-
     }
 
     protected IEnumerator CRDummyLoad(GameOperation operation)
@@ -64,6 +63,7 @@ public class CatGrabsItemsGame : BaseGame
         mapInstance.mapRaycastController.onRayCastHit.AddListener(catInstance.MoveTo);
 
         operation.isDone = true;
+        OnGameLoaded.Invoke();
     }
 
     protected void SetupTargets()
