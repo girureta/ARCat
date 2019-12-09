@@ -45,7 +45,10 @@ public class MainAppUI : MonoBehaviour
                 break;
             case MainApp.State.WaitingForARTarget:
                 initialPanel.Disable();
-                ARTargetPanel.Enable();
+                if (!GroundPlaneHelper.isTracked)
+                {
+                    ARTargetPanel.Enable();
+                }
                 break;
             case MainApp.State.WaitingForUser:
                 ARTargetPanel.Disable();
