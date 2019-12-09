@@ -64,6 +64,7 @@ public class CatGrabsItemsGame : BaseGame
     public override void EndGameplay()
     {
         state = State.ended;
+        catInstance.gameObject.SetActive(false);
         mapInstance.mapRaycastController.enabled = false;
         OnGameplayEnded.Invoke();
     }
