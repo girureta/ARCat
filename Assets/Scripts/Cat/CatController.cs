@@ -11,16 +11,19 @@ public class CatController : MonoBehaviour
     }
 
     protected State state = State.idle;
-    protected Vector3 target = Vector3.zero;
+    protected Vector3 localTarget = Vector3.zero;
     protected Vector3 currentVelocity = Vector3.zero;
 
     public Animator animator;
     protected int animatorIdleTrigger = Animator.StringToHash("idle");
     protected int animatorWalkTrigger = Animator.StringToHash("walk");
 
-    public void MoveTo(Vector3 position)
+    public float speed = 4.0f;
+    public float angularSpeed = 360.0f;
+
+    public void MoveTo(Vector3 worldPosition)
     {
-        target = position;
+        localTarget = transform.parent.worldToLocalMatrix *  worldPosition;
         SetWalk();
     }
 
@@ -28,9 +31,13 @@ public class CatController : MonoBehaviour
     {
         if (state == State.walking)
         {
-            float distance = Vector3.Distance(transform.position, target);
-            float timeToReach = distance / 4.0f;
-            transform.position = Vector3.SmoothDamp(transform.position, target, ref currentVelocity, timeToReach);
+            float distance = Vector3.Distance(transform.localPosition, localTarget);
+            float timeToReach = distance / speed;
+            transform.localPosition = Vector3.SmoothDamp(transform.localPosition, localTarget, ref currentVelocity, timeToReach);
+
+            Quaternion rotationToTarget = Quaternion.FromToRotation(Vector3.forward, localTarget - transform.localPosition);  
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, rotationToTarget, angularSpeed * Time.deltaTime);
+
             if (distance < 0.05)
             {
                 SetIdle();
@@ -40,8 +47,11 @@ public class CatController : MonoBehaviour
 
     protected void SetWalk()
     {
-        state = State.walking;
-        animator.SetTrigger(animatorWalkTrigger);
+        if (state != State.walking)
+        {
+            state = State.walking;
+            animator.SetTrigger(animatorWalkTrigger);
+        }
     }
 
     protected void SetIdle()
