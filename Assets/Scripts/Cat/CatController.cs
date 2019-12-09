@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,14 @@ public class CatController : MonoBehaviour
 
     public float speed = 4.0f;
     public float angularSpeed = 360.0f;
+
+    public float health = 100.0f;
+
+    internal void ApplyDamage(float damage)
+    {
+        health -= damage;
+        Debug.LogFormat("H: {0}, Damage: {1}", health, damage);
+    }
 
     public void MoveTo(Vector3 worldPosition)
     {
