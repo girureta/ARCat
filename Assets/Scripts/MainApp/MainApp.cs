@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /// </summary>
 public class MainApp : MonoBehaviour
 {
-    public Camera camera;
+    public new Camera camera;
 
     /// <summary>
     /// The prefab of the Game to execute
