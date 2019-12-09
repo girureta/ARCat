@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class MapRaycastController : MonoBehaviour
 {
-    protected Camera camera;
+    protected new Camera camera;
     public string layerName = "MapRaycast";
     protected int layer;
 

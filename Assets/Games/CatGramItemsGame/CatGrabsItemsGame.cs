@@ -18,6 +18,8 @@ public class CatGrabsItemsGame : BaseGame
     public float remainingTime = 0.0f;
     public float gameLength = 5.0f;
 
+    public MapManipulator mapManipulator;
+
     public UnityEvent OnTargetCatched = new UnityEvent();
 
     public override GameOperation LoadGame()
@@ -72,6 +74,7 @@ public class CatGrabsItemsGame : BaseGame
     {
         yield return new WaitForSeconds(1.0f);
         mapInstance = GameObject.Instantiate(mapPrefab);
+        mapManipulator.mapPivot = mapInstance.transform;
         SetupTargets();
 
         catInstance = GameObject.Instantiate(catPrefab);
