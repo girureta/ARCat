@@ -7,8 +7,8 @@ public class CatGrabsItemsGameUI : MonoBehaviour
 {
     public GameObject canvas;
     public CatGrabsItemsGame game;
-    public Text catchedTargets;
-    public Text timer;
+    public TextPanelController catchedTargets;
+    public TextPanelController timer;
     public EndGamePanelController endGamePanel;
 
     private void OnEnable()
@@ -26,8 +26,8 @@ public class CatGrabsItemsGameUI : MonoBehaviour
 
     protected void OnGameplayEnded()
     {
-        catchedTargets.transform.parent.gameObject.SetActive(false);
-        timer.transform.parent.gameObject.SetActive(false);
+        catchedTargets.Disable();
+        timer.Disable();
         endGamePanel.Enable();
     }
 
@@ -70,11 +70,11 @@ public class CatGrabsItemsGameUI : MonoBehaviour
     {
         float time = game.remainingTime;
         time = Mathf.Max(time, 0.0f);
-        timer.text = time.ToString("F1");
+        timer.text.text = time.ToString("F1");
     }
 
     protected void UpdateCatchedTargets()
     {
-        catchedTargets.text = string.Format("{0}/{1}", game.catchedTargets, game.numTargets);
+        catchedTargets.text.text = string.Format("{0}/{1}", game.catchedTargets, game.numTargets);
     }
 }
