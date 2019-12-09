@@ -21,6 +21,7 @@ public class CatController : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip painAudioClip;
+    public ParticleSystem fireDamageParticle;
 
     public float speed = 4.0f;
     public float angularSpeed = 360.0f;
@@ -36,6 +37,10 @@ public class CatController : MonoBehaviour
             audioSource.clip = painAudioClip;
             audioSource.Play();
         }
+
+        var particles = GameObject.Instantiate(fireDamageParticle);
+        Utils.SetParentAndModifyScale(particles.transform, transform.parent);
+        particles.transform.position = audioSource.transform.position;
 
         Debug.LogFormat("H: {0}, Damage: {1}", health, damage);
     }

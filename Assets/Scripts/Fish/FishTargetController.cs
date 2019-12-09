@@ -12,6 +12,7 @@ public class FishTargetController : MonoBehaviour
     public Transform particleSpawnPoint;
     public ParticleSystem targedCatchedParticlesPrefab;
 
+
     private void OnTriggerEnter(Collider other)
     {
         CatController cat = other.GetComponent<CatController>();
@@ -26,10 +27,7 @@ public class FishTargetController : MonoBehaviour
     protected void SpawnParticles()
     {
         var particles = GameObject.Instantiate(targedCatchedParticlesPrefab);
-        var scale = particles.transform.localScale;
-        particles.transform.transform.SetParent(transform.parent);
-        scale.Scale(transform.parent.lossyScale);
-        particles.transform.localScale = scale;
+        Utils.SetParentAndModifyScale(particles.transform, transform.parent);
         particles.transform.position = particleSpawnPoint.position;
     }
 }

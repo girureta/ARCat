@@ -494,6 +494,8 @@ MonoBehaviour:
   animator: {fileID: 8969594057427930382}
   audioSource: {fileID: 5763741875862365579}
   painAudioClip: {fileID: 8300000, guid: eee8c1795e2e2d34b93ce1ff4ea01818, type: 3}
+  fireDamageParticle: {fileID: 1969364487111642290, guid: 21ff552cc3ec071429d4ad1da6846a0e,
+    type: 3}
   speed: 4
   angularSpeed: 360
   health: 100
