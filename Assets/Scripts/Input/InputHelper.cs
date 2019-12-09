@@ -47,30 +47,6 @@ public static class InputHelper
         return retValue;
     }
 
-    private static bool IsPinchingTouch()
-    {
-        bool retValue = false;
-
-        if (Input.touchCount >= 2)
-        {
-            retValue = true;
-        }
-
-        return retValue;
-    }
-
-    private static bool IsPinchingMouse()
-    {
-        bool retValue = false;
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            retValue = true;
-        }
-
-        return retValue;
-    }
-
     public static float PinchDelta()
     {
         float delta = 0.0f;
@@ -97,6 +73,30 @@ public static class InputHelper
         }
 
         return delta;
+    }
+
+    private static bool IsPinchingTouch()
+    {
+        bool retValue = false;
+
+        if (Input.touchCount >= 2)
+        {
+            retValue = true;
+        }
+
+        return retValue;
+    }
+
+    private static bool IsPinchingMouse()
+    {
+        bool retValue = false;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            retValue = true;
+        }
+
+        return retValue;
     }
 
 }
