@@ -22,6 +22,11 @@ public class CatGrabsItemsGameUI : MonoBehaviour
         UpdateInfo();
     }
 
+    public void QuitGame()
+    {
+        game.QuitGame();
+    }
+
     private void Update()
     {
         switch (game.GetState())
