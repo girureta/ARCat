@@ -44,8 +44,15 @@ public class CatGrabsItemsGame : BaseGame
         //The timer ran out
         if (remainingTime <= 0.0f)
         {
-            QuitGame();
+            EndGameplay();
         }
+    }
+
+    public override void EndGameplay()
+    {
+        state = State.ended;
+        mapInstance.mapRaycastController.enabled = false;
+        OnGameplayEnded.Invoke();
     }
 
     public override void PauseGame()
@@ -66,7 +73,7 @@ public class CatGrabsItemsGame : BaseGame
         OnTargetCatched.Invoke();
         if (catchedTargets == numTargets )
         {
-            QuitGame();
+            EndGameplay();
         }
     }
 
@@ -103,7 +110,7 @@ public class CatGrabsItemsGame : BaseGame
     {
         Destroy(mapInstance.gameObject);
         yield return new WaitForSeconds(1.0f);
-        OnGameFinished.Invoke();
+        OnGameQuit.Invoke();
         operation.isDone = true;
     }
 }

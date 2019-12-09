@@ -9,11 +9,13 @@ public class CatGrabsItemsGameUI : MonoBehaviour
     public CatGrabsItemsGame game;
     public Text catchedTargets;
     public Text timer;
+    public EndGamePanelController endGamePanel;
 
     private void OnEnable()
     {
         game.OnGameLoaded.AddListener(OnGameWasLoaded);
         game.OnTargetCatched.AddListener(UpdateCatchedTargets);
+        game.OnGameplayEnded.AddListener(OnGameplayEnded);
     }
 
     protected void OnGameWasLoaded()
@@ -22,7 +24,19 @@ public class CatGrabsItemsGameUI : MonoBehaviour
         UpdateInfo();
     }
 
-    public void QuitGame()
+    protected void OnGameplayEnded()
+    {
+        catchedTargets.transform.parent.gameObject.SetActive(false);
+        timer.transform.parent.gameObject.SetActive(false);
+        endGamePanel.Enable();
+    }
+
+    public void EndGameplay()
+    {
+        game.EndGameplay();
+    }
+
+    public void AcknowledgedEndGameplay()
     {
         game.QuitGame();
     }

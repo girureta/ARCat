@@ -91,7 +91,7 @@ public class MainApp : MonoBehaviour
     {
         if (gameLoadingOperation.isDone)
         {
-            gameInstance.OnGameFinished.AddListener(OnGameFinished);
+            gameInstance.OnGameQuit.AddListener(OnGameFinished);
             gameInstance.StartGame();
             ChangeState(State.RunningGame);
         }
@@ -99,7 +99,7 @@ public class MainApp : MonoBehaviour
 
     protected void OnGameFinished()
     {
-        gameInstance.OnGameFinished.RemoveListener(OnGameFinished);
+        gameInstance.OnGameQuit.RemoveListener(OnGameFinished);
         Destroy(gameInstance.gameObject);
         ChangeState(State.WaitingForUser);
     }

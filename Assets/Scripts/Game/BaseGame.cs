@@ -31,6 +31,17 @@ public abstract class BaseGame : MonoBehaviour
     public abstract void PauseGame();
 
     /// <summary>
+    /// Ends the gameplay.
+    /// </summary>
+    public abstract void EndGameplay();
+
+    /// <summary>
+    /// The event that indicates that the gameplay finished. The end game condition is met.
+    /// It doesn't mean that the whole game is done executing
+    /// </summary>
+    public UnityEvent OnGameplayEnded = new UnityEvent();
+
+    /// <summary>
     /// Quits the game, which will clean up all the elements created and will eventually trigger
     /// OnGameFinished.
     /// The is consideted to be finishes when OnGameFinished is triggered.
@@ -39,9 +50,9 @@ public abstract class BaseGame : MonoBehaviour
     public abstract GameOperation QuitGame();
 
     /// <summary>
-    /// The event that indicates that the game is 100% done.
+    /// Indicates that the game is done, the objects were distroyed.
     /// </summary>
-    public UnityEvent OnGameFinished = new UnityEvent();
+    public UnityEvent OnGameQuit = new UnityEvent();
 
     /// <summary>
     /// Indicates when the games was loaded
@@ -72,6 +83,7 @@ public abstract class BaseGame : MonoBehaviour
         unloaded,
         loaded,
         started,
+        ended,
         quit,
     }
 }
