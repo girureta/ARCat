@@ -101,12 +101,21 @@ public class CatGrabsItemsGame : BaseGame
         catInstance.transform.SetParent(mapInstance.transform);
         catInstance.transform.position = mapInstance.characterSpawnPoint.position;
         catInstance.transform.rotation = mapInstance.characterSpawnPoint.rotation;
+        OnCatHealthChanged.AddListener(OnCatHealthChange);
 
         mapInstance.mapRaycastController.onRayCastHit.AddListener(catInstance.MoveTo);
 
         operation.isDone = true;
         state = State.loaded;
         OnGameLoaded.Invoke();
+    }
+
+    protected void OnCatHealthChange(float newHealth)
+    {
+        if (newHealth <= 0.0f)
+        {
+            EndGameplay();
+        }
     }
 
     protected void SetupTargets()
