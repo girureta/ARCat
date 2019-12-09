@@ -41,7 +41,7 @@ public static class InputHelper
     {
         bool retValue = false;
 
-        retValue = IsPinchingTouch();
+        retValue = IsTouching2Fingers();
         retValue = retValue || IsPinchingMouse();
 
         return retValue;
@@ -51,7 +51,7 @@ public static class InputHelper
     {
         float delta = 0.0f;
 
-        if (IsPinchingTouch())
+        if (IsTouching2Fingers())
         {
             Touch touch0 = Input.GetTouch(0);
             Touch touch1 = Input.GetTouch(1);
@@ -75,7 +75,45 @@ public static class InputHelper
         return delta;
     }
 
-    private static bool IsPinchingTouch()
+    public static float RotationDelta()
+    {
+        float delta = 0.0f;
+
+        if (IsTouching2Fingers())
+        {
+            Touch touch0 = Input.GetTouch(0);
+            Touch touch1 = Input.GetTouch(1);
+
+            Vector3 touch0Current = touch0.position;
+            Vector3 touch0Previous = touch0.position + touch0.deltaPosition;
+
+            Vector3 touch1Current = touch1.position;
+            Vector3 touch1Previous = touch1.position + touch1.deltaPosition;
+
+            float distanceCurrent = Vector3.Distance(touch0Current, touch1Current);
+            float distancePrevious = Vector3.Distance(touch0Previous, touch1Previous);
+            delta = Vector3.SignedAngle(touch0Previous - touch1Previous, touch0Current - touch1Current,Vector3.forward);
+        }
+
+        if (IsRotatingMouse())
+        {
+            delta = -Input.mouseScrollDelta.y * 3.0f;
+        }
+
+        return delta;
+    }
+
+    public static bool IsRotating()
+    {
+        bool isRotating = false;
+
+        isRotating = IsTouching2Fingers();
+        isRotating = isRotating || IsRotatingMouse();
+
+        return isRotating;
+    }
+
+    private static bool IsTouching2Fingers()
     {
         bool retValue = false;
 
@@ -92,6 +130,18 @@ public static class InputHelper
         bool retValue = false;
 
         if (Input.GetKey(KeyCode.LeftShift))
+        {
+            retValue = true;
+        }
+
+        return retValue;
+    }
+
+    private static bool IsRotatingMouse()
+    {
+        bool retValue = false;
+
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             retValue = true;
         }
