@@ -9,6 +9,7 @@ public class CatGrabsItemsGameUI : MonoBehaviour
     public CatGrabsItemsGame game;
     public TextPanelController catchedTargets;
     public TextPanelController timer;
+    public PanelController quickButtonPanel;
     public EndGamePanelController endGamePanel;
 
     private void OnEnable()
@@ -28,6 +29,7 @@ public class CatGrabsItemsGameUI : MonoBehaviour
     {
         catchedTargets.Disable();
         timer.Disable();
+        quickButtonPanel.Disable();
         endGamePanel.Enable();
     }
 
