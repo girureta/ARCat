@@ -27,7 +27,10 @@ public class PanelController : MonoBehaviour
     /// </summary>
     public void Disable()
     {
-        animator.SetTrigger(animatorDisable);
+        if (animator.isActiveAndEnabled)
+        {
+            animator.SetTrigger(animatorDisable);
+        }
     }
 
     /// <summary>

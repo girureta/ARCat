@@ -7,13 +7,16 @@ public class CatGrabsItemsGameUI : MonoBehaviour
 {
     public GameObject canvas;
     public CatGrabsItemsGame game;
-    public Text catchedTargets;
-    public Text timer;
+    public TextPanelController catchedTargets;
+    public TextPanelController timer;
+    public PanelController quickButtonPanel;
+    public EndGamePanelController endGamePanel;
 
     private void OnEnable()
     {
         game.OnGameLoaded.AddListener(OnGameWasLoaded);
         game.OnTargetCatched.AddListener(UpdateCatchedTargets);
+        game.OnGameplayEnded.AddListener(OnGameplayEnded);
     }
 
     protected void OnGameWasLoaded()
@@ -22,7 +25,21 @@ public class CatGrabsItemsGameUI : MonoBehaviour
         UpdateInfo();
     }
 
-    public void QuitGame()
+    protected void OnGameplayEnded()
+    {
+        catchedTargets.Disable();
+        timer.Disable();
+        quickButtonPanel.Disable();
+        endGamePanel.Enable();
+        endGamePanel.SetData(game.catchedTargets, game.gameLength - GetReamingTime());
+    }
+
+    public void EndGameplay()
+    {
+        game.EndGameplay();
+    }
+
+    public void AcknowledgedEndGameplay()
     {
         game.QuitGame();
     }
@@ -54,13 +71,18 @@ public class CatGrabsItemsGameUI : MonoBehaviour
 
     protected void UpdateTimer()
     {
+        timer.text.text = GetReamingTime().ToString("F1");
+    }
+
+    protected float GetReamingTime()
+    {
         float time = game.remainingTime;
         time = Mathf.Max(time, 0.0f);
-        timer.text = time.ToString();
+        return time;
     }
 
     protected void UpdateCatchedTargets()
     {
-        catchedTargets.text = string.Format("{0}/{1}", game.catchedTargets, game.numTargets);
+        catchedTargets.text.text = string.Format("{0}/{1}", game.catchedTargets, game.numTargets);
     }
 }
