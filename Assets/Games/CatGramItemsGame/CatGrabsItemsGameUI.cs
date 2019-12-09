@@ -31,6 +31,7 @@ public class CatGrabsItemsGameUI : MonoBehaviour
         timer.Disable();
         quickButtonPanel.Disable();
         endGamePanel.Enable();
+        endGamePanel.SetData(game.catchedTargets, game.gameLength - GetReamingTime());
     }
 
     public void EndGameplay()
@@ -70,9 +71,14 @@ public class CatGrabsItemsGameUI : MonoBehaviour
 
     protected void UpdateTimer()
     {
+        timer.text.text = GetReamingTime().ToString("F1");
+    }
+
+    protected float GetReamingTime()
+    {
         float time = game.remainingTime;
         time = Mathf.Max(time, 0.0f);
-        timer.text.text = time.ToString("F1");
+        return time;
     }
 
     protected void UpdateCatchedTargets()
