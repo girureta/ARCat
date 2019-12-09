@@ -22,6 +22,19 @@ public class CatGrabsItemsGame : BaseGame
 
     public UnityEvent OnTargetCatched = new UnityEvent();
 
+    public CatController.HealthChangedEvent OnCatHealthChanged
+    {
+        get
+        {
+            return catInstance.OnHealthChanged;
+        }
+
+        set
+        {
+            catInstance.OnHealthChanged = value;
+        }
+    }
+
     public override GameOperation LoadGame()
     {
         GameOperation operation = new GameOperation();

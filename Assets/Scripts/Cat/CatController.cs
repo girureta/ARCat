@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CatController : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class CatController : MonoBehaviour
 
     public float health = 100.0f;
 
+    public HealthChangedEvent OnHealthChanged = new HealthChangedEvent();
+
     internal void ApplyDamage(float damage)
     {
         health -= damage;
@@ -42,12 +45,13 @@ public class CatController : MonoBehaviour
         Utils.SetParentAndModifyScale(particles.transform, transform.parent);
         particles.transform.position = audioSource.transform.position;
 
+        OnHealthChanged.Invoke(health);
         Debug.LogFormat("H: {0}, Damage: {1}", health, damage);
     }
 
     public void MoveTo(Vector3 worldPosition)
     {
-        localTarget = transform.parent.worldToLocalMatrix *  worldPosition;
+        localTarget = transform.parent.worldToLocalMatrix * worldPosition;
         SetWalk();
     }
 
@@ -59,7 +63,7 @@ public class CatController : MonoBehaviour
             float timeToReach = distance / speed;
             transform.localPosition = Vector3.SmoothDamp(transform.localPosition, localTarget, ref currentVelocity, timeToReach);
 
-            Quaternion rotationToTarget = Quaternion.FromToRotation(Vector3.forward, localTarget - transform.localPosition);  
+            Quaternion rotationToTarget = Quaternion.FromToRotation(Vector3.forward, localTarget - transform.localPosition);
             transform.localRotation = Quaternion.RotateTowards(transform.localRotation, rotationToTarget, angularSpeed * Time.deltaTime);
 
             if (distance < 0.05)
@@ -83,4 +87,7 @@ public class CatController : MonoBehaviour
         state = State.idle;
         animator.SetTrigger(animatorIdleTrigger);
     }
+
+    [System.Serializable]
+    public class HealthChangedEvent : UnityEvent<float> { }
 }

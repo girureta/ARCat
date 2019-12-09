@@ -9,20 +9,27 @@ public class CatGrabsItemsGameUI : MonoBehaviour
     public CatGrabsItemsGame game;
     public TextPanelController catchedTargets;
     public TextPanelController timer;
+    public HealthPanelController healthPanel;
     public PanelController quickButtonPanel;
     public EndGamePanelController endGamePanel;
 
     private void OnEnable()
     {
         game.OnGameLoaded.AddListener(OnGameWasLoaded);
-        game.OnTargetCatched.AddListener(UpdateCatchedTargets);
         game.OnGameplayEnded.AddListener(OnGameplayEnded);
     }
 
     protected void OnGameWasLoaded()
     {
         canvas.SetActive(true);
+        game.OnTargetCatched.AddListener(UpdateCatchedTargets);
+        game.OnCatHealthChanged.AddListener(OnCatHealthChanged);
         UpdateInfo();
+    }
+
+    protected void OnCatHealthChanged(float newHealth)
+    {
+        healthPanel.SetHealthValue(newHealth);
     }
 
     protected void OnGameplayEnded()
