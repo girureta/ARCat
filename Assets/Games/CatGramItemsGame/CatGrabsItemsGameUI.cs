@@ -56,7 +56,7 @@ public class CatGrabsItemsGameUI : MonoBehaviour
     {
         float time = game.remainingTime;
         time = Mathf.Max(time, 0.0f);
-        timer.text = time.ToString();
+        timer.text = time.ToString("F1");
     }
 
     protected void UpdateCatchedTargets()
