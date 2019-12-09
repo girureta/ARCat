@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class MapRaycastController : MonoBehaviour
 {
-    protected new Camera camera;
+    protected Camera camera;
     public string layerName = "MapRaycast";
     protected int layer;
 

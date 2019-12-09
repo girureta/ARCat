@@ -46,7 +46,6 @@ public class CatController : MonoBehaviour
         particles.transform.position = audioSource.transform.position;
 
         OnHealthChanged.Invoke(health);
-        Debug.LogFormat("H: {0}, Damage: {1}", health, damage);
     }
 
     public void MoveTo(Vector3 worldPosition)
