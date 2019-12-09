@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15c62a84c8151846a32fdec309c6adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageInterval: 1
+  damageInterval: 2
   damage: 10
 --- !u!1001 &6438421735808348705
 PrefabInstance:

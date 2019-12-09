@@ -19,6 +19,9 @@ public class CatController : MonoBehaviour
     protected int animatorIdleTrigger = Animator.StringToHash("idle");
     protected int animatorWalkTrigger = Animator.StringToHash("walk");
 
+    public AudioSource audioSource;
+    public AudioClip painAudioClip;
+
     public float speed = 4.0f;
     public float angularSpeed = 360.0f;
 
@@ -27,6 +30,13 @@ public class CatController : MonoBehaviour
     internal void ApplyDamage(float damage)
     {
         health -= damage;
+
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = painAudioClip;
+            audioSource.Play();
+        }
+
         Debug.LogFormat("H: {0}, Damage: {1}", health, damage);
     }
 
