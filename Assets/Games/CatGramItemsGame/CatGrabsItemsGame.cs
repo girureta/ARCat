@@ -22,6 +22,19 @@ public class CatGrabsItemsGame : BaseGame
 
     public UnityEvent OnTargetCatched = new UnityEvent();
 
+    public CatController.HealthChangedEvent OnCatHealthChanged
+    {
+        get
+        {
+            return catInstance.OnHealthChanged;
+        }
+
+        set
+        {
+            catInstance.OnHealthChanged = value;
+        }
+    }
+
     public override GameOperation LoadGame()
     {
         GameOperation operation = new GameOperation();
@@ -88,12 +101,21 @@ public class CatGrabsItemsGame : BaseGame
         catInstance.transform.SetParent(mapInstance.transform);
         catInstance.transform.position = mapInstance.characterSpawnPoint.position;
         catInstance.transform.rotation = mapInstance.characterSpawnPoint.rotation;
+        OnCatHealthChanged.AddListener(OnCatHealthChange);
 
         mapInstance.mapRaycastController.onRayCastHit.AddListener(catInstance.MoveTo);
 
         operation.isDone = true;
         state = State.loaded;
         OnGameLoaded.Invoke();
+    }
+
+    protected void OnCatHealthChange(float newHealth)
+    {
+        if (newHealth <= 0.0f)
+        {
+            EndGameplay();
+        }
     }
 
     protected void SetupTargets()
