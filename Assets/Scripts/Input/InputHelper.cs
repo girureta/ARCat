@@ -37,6 +37,10 @@ public static class InputHelper
         return position;
     }
 
+    /// <summary>
+    /// If the Pinch gesture is being peformed.
+    /// </summary>
+    /// <returns></returns>
     public static bool IsPinching()
     {
         bool retValue = false;
@@ -47,6 +51,10 @@ public static class InputHelper
         return retValue;
     }
 
+    /// <summary>
+    /// Returns the delta of the pinch gesture. Or zero if there is no pinch gesture going on.
+    /// </summary>
+    /// <returns>The delta</returns>
     public static float PinchDelta()
     {
         float delta = 0.0f;
@@ -75,6 +83,24 @@ public static class InputHelper
         return delta;
     }
 
+    /// <summary>
+    /// Whether the Rotation gesture is being done
+    /// </summary>
+    /// <returns></returns>
+    public static bool IsRotating()
+    {
+        bool isRotating = false;
+
+        isRotating = IsTouching2Fingers();
+        isRotating = isRotating || IsRotatingMouse();
+
+        return isRotating;
+    }
+
+    /// <summary>
+    /// The delta of the Rotation gesture. Or zero if there is no Rotation gesture going on.
+    /// </summary>
+    /// <returns>The rotation delta</returns>
     public static float RotationDelta()
     {
         float delta = 0.0f;
@@ -103,16 +129,11 @@ public static class InputHelper
         return delta;
     }
 
-    public static bool IsRotating()
-    {
-        bool isRotating = false;
-
-        isRotating = IsTouching2Fingers();
-        isRotating = isRotating || IsRotatingMouse();
-
-        return isRotating;
-    }
-
+    /// <summary>
+    /// Whether two fingers are touching the screen.
+    /// Used for the pinch and rotate gestures.
+    /// </summary>
+    /// <returns></returns>
     private static bool IsTouching2Fingers()
     {
         bool retValue = false;
@@ -125,6 +146,11 @@ public static class InputHelper
         return retValue;
     }
 
+    /// <summary>
+    /// Whether where are doing the Pinch gesture with the mouse.
+    /// This implies pressing the LeftShift key.
+    /// </summary>
+    /// <returns></returns>
     private static bool IsPinchingMouse()
     {
         bool retValue = false;
@@ -137,6 +163,11 @@ public static class InputHelper
         return retValue;
     }
 
+    /// <summary>
+    /// Whether where are doing the Rotate gesture with the mouse.
+    /// This implies pressing the LeftControl key.
+    /// </summary>
+    /// <returns></returns>
     private static bool IsRotatingMouse()
     {
         bool retValue = false;
