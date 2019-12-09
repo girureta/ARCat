@@ -161,6 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6647490199435570684}
   - component: {fileID: -8473485631772018931}
+  - component: {fileID: 8749271800481473459}
   m_Layer: 0
   m_Name: CatGrabsItemsGame
   m_TagString: Untagged
@@ -208,10 +209,28 @@ MonoBehaviour:
   numTargets: 1
   catchedTargets: 0
   remainingTime: 0
-  gameLength: 5
+  gameLength: 50
+  mapManipulator: {fileID: 8749271800481473459}
   OnTargetCatched:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8749271800481473459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683692181739198328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8932767adbde3429c905335849989b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapPivot: {fileID: 0}
+  minScale: 0.1
+  maxScale: 4
+  scaleSpeed: 0.5
+  rotationSpeed: 90
 --- !u!1 &2783665118209924309
 GameObject:
   m_ObjectHideFlags: 0

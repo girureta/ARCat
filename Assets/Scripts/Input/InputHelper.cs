@@ -77,7 +77,7 @@ public static class InputHelper
 
         if (IsPinchingMouse())
         {
-            delta = Input.mouseScrollDelta.y *100.0f;
+            delta = Input.mouseScrollDelta.y;
         }
 
         return delta;
@@ -123,7 +123,7 @@ public static class InputHelper
 
         if (IsRotatingMouse())
         {
-            delta = -Input.mouseScrollDelta.y * 3.0f;
+            delta = -Input.mouseScrollDelta.y;
         }
 
         return delta;
