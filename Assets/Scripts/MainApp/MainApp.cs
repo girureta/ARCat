@@ -97,6 +97,18 @@ public class MainApp : MonoBehaviour
         }
     }
 
+    public void SkipWaitingForARTarget()
+    {
+        SetARTargetFound();
+        //Preset camera rotation in case we are skipping the AR target setup
+        camera.transform.rotation = Quaternion.Euler(38.344f, 34.686f,0.0f);
+    }
+
+    protected void SetARTargetFound()
+    {
+        ChangeState(State.WaitingForUser);
+    }
+
     protected void OnGameFinished()
     {
         gameInstance.OnGameQuit.RemoveListener(OnGameFinished);
@@ -108,7 +120,7 @@ public class MainApp : MonoBehaviour
     {
         if (GroundPlaneHelper.isTracked)
         {
-            ChangeState(State.WaitingForUser);
+            SetARTargetFound();
         }
     }
 
