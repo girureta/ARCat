@@ -37,6 +37,7 @@ public class CatGrabsItemsGameUI : MonoBehaviour
         catchedTargets.Disable();
         timer.Disable();
         quickButtonPanel.Disable();
+        healthPanel.Disable();
         endGamePanel.Enable();
         endGamePanel.SetData(game.catchedTargets, game.gameLength - GetReamingTime());
     }

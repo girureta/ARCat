@@ -76,4 +76,9 @@ public class MainAppUI : MonoBehaviour
         mainApp.StartGame();
     }
 
+    public void SkipWaitingForARTarget()
+    {
+        mainApp.SkipWaitingForARTarget();
+    }
+
 }
