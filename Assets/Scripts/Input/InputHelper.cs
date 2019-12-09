@@ -37,4 +37,66 @@ public static class InputHelper
         return position;
     }
 
+    public static bool IsPinching()
+    {
+        bool retValue = false;
+
+        retValue = IsPinchingTouch();
+        retValue = retValue || IsPinchingMouse();
+
+        return retValue;
+    }
+
+    private static bool IsPinchingTouch()
+    {
+        bool retValue = false;
+
+        if (Input.touchCount >= 2)
+        {
+            retValue = true;
+        }
+
+        return retValue;
+    }
+
+    private static bool IsPinchingMouse()
+    {
+        bool retValue = false;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            retValue = true;
+        }
+
+        return retValue;
+    }
+
+    public static float PinchDelta()
+    {
+        float delta = 0.0f;
+
+        if (IsPinchingTouch())
+        {
+            Touch touch0 = Input.GetTouch(0);
+            Touch touch1 = Input.GetTouch(1);
+
+            Vector3 touch0Current = touch0.position;
+            Vector3 touch0Previous = touch0.position + touch0.deltaPosition;
+
+            Vector3 touch1Current = touch1.position;
+            Vector3 touch1Previous = touch1.position + touch1.deltaPosition;
+
+            float distanceCurrent = Vector3.Distance(touch0Current, touch1Current);
+            float distancePrevious = Vector3.Distance(touch0Previous, touch1Previous);
+            delta = distancePrevious - distanceCurrent;
+        }
+
+        if (IsPinchingMouse())
+        {
+            delta = Input.mouseScrollDelta.y *100.0f;
+        }
+
+        return delta;
+    }
+
 }
