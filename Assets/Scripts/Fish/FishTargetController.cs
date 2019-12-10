@@ -12,6 +12,34 @@ public class FishTargetController : MonoBehaviour
     public Transform particleSpawnPoint;
     public ParticleSystem targedCatchedParticlesPrefab;
 
+    public Animator animator;
+    protected int animatorJumpTrigger = Animator.StringToHash("jump");
+
+    protected float timeNextJump = 0.0f;
+
+    private void OnEnable()
+    {
+        ScheludeNextJump();
+    }
+
+    private void Update()
+    {
+        if (Time.time >= timeNextJump)
+        {
+            animator.SetTrigger(animatorJumpTrigger);
+            ScheludeNextJump();
+        }
+    }
+
+    protected void ScheludeNextJump()
+    {
+        timeNextJump = Time.time + GetNextJumpTime();
+    }
+
+    protected float GetNextJumpTime(float lambda = 0.5f)
+    {
+        return Mathf.Log(1.0f - Random.value) / (-lambda);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,4 +58,6 @@ public class FishTargetController : MonoBehaviour
         Utils.SetParentAndModifyScale(particles.transform, transform.parent);
         particles.transform.position = particleSpawnPoint.position;
     }
+
+
 }
