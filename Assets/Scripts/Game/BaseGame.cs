@@ -9,8 +9,10 @@ using UnityEngine.Events;
 /// LoadGame.
 /// StartGame.
 /// PauseGame.
+/// EndGameplay.
+/// OnGameplayEndedis triggered.
 /// QuitGame - If the user want to quit the game, or internally if the end game condition is met.
-/// OnGameFinished is triggered.
+/// OnGameQuit is triggered.
 /// </summary>
 public abstract class BaseGame : MonoBehaviour
 {

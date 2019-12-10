@@ -1,16 +1,40 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class CatGrabsItemsGameUI : MonoBehaviour
 {
+    /// <summary>
+    /// The canvas GameObject The root of the UI.
+    /// </summary>
     public GameObject canvas;
+
+    /// <summary>
+    /// Reference to the game that this UI belongs to.
+    /// </summary>
     public CatGrabsItemsGame game;
+
+    /// <summary>
+    /// The panel that shows how many targets were caught.
+    /// </summary>
     public TextPanelController catchedTargets;
+
+    /// <summary>
+    /// The panel that shows the remaining time.
+    /// </summary>
     public TextPanelController timer;
+
+    /// <summary>
+    /// The panel that shows the cat's health.
+    /// </summary>
     public HealthPanelController healthPanel;
+
+    /// <summary>
+    /// The quit button.
+    /// </summary>
     public PanelController quickButtonPanel;
+
+    /// <summary>
+    /// The panel that is shown at the end of the gameplay and has the number of catched fishes and the elapsed time.
+    /// </summary>
     public EndGamePanelController endGamePanel;
 
     private void OnEnable()
@@ -19,6 +43,9 @@ public class CatGrabsItemsGameUI : MonoBehaviour
         game.OnGameplayEnded.AddListener(OnGameplayEnded);
     }
 
+    /// <summary>
+    /// Subscribes to some of the game events to update the catched targets and the cat's health.
+    /// </summary>
     protected void OnGameWasLoaded()
     {
         canvas.SetActive(true);
@@ -32,6 +59,9 @@ public class CatGrabsItemsGameUI : MonoBehaviour
         healthPanel.SetHealthValue(newHealth);
     }
 
+    /// <summary>
+    /// Hides the in-game UI and shows the end game panel
+    /// </summary>
     protected void OnGameplayEnded()
     {
         catchedTargets.Disable();

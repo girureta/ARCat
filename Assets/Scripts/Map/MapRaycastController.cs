@@ -4,9 +4,16 @@ using UnityEngine.Events;
 public class MapRaycastController : MonoBehaviour
 {
     protected Camera camera;
+
+    /// <summary>
+    /// The layer where the objects that we want to raycast too are placed in. In this game we use a quad above the ground.
+    /// </summary>
     public string layerName = "MapRaycast";
     protected int layer;
 
+    /// <summary>
+    /// Indicates that a ray was casted and it hit the map
+    /// </summary>
     public RayCastHitEvent onRayCastHit = new RayCastHitEvent();
 
     private void Awake()

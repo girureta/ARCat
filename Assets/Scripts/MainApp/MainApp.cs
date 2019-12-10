@@ -15,7 +15,14 @@ public class MainApp : MonoBehaviour
     /// </summary>
     public BaseGame game;
 
+    /// <summary>
+    /// The instance of the game being run
+    /// </summary>
     protected BaseGame gameInstance;
+
+    /// <summary>
+    /// Operation that indicates how the game loading is going.
+    /// </summary>
     protected BaseGame.GameOperation gameLoadingOperation;
 
     /// <summary>
@@ -97,10 +104,14 @@ public class MainApp : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Avoids waiting for the AR target to be found.
+    /// If it is alter found then the camera will move to the determined position.
+    /// </summary>
     public void SkipWaitingForARTarget()
     {
         SetARTargetFound();
-        //Preset camera rotation in case we are skipping the AR target setup
+        //Preset camera rotation so we can see the map
         camera.transform.rotation = Quaternion.Euler(38.344f, 34.686f,0.0f);
     }
 
