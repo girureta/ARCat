@@ -10,6 +10,6 @@ public class EndGamePanelController : PanelController
     {
         string timeString = time.ToString("F1");
         catchedTargetsText.text = string.Format("Fishes: {0}", catchedTargets);
-        remainingTimeText.text = string.Format("Elapsed time: {0}", timeString);
+        remainingTimeText.text = string.Format("Time: {0}", timeString);
     }
 }
