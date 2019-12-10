@@ -43,6 +43,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageInterval: 2
   damage: 10
+  meshRenderer: {fileID: 6438421735810698009}
+  animator: {fileID: 0}
 --- !u!1001 &6438421735808348705
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55,12 +57,12 @@ PrefabInstance:
       value: block_06 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 173944, guid: 73e91d004aaae9b4e9a2c150f53888c3, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 173944, guid: 73e91d004aaae9b4e9a2c150f53888c3, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 173944, guid: 73e91d004aaae9b4e9a2c150f53888c3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 473944, guid: 73e91d004aaae9b4e9a2c150f53888c3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -116,6 +118,12 @@ PrefabInstance:
 --- !u!1 &6438421735808177497 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 173944, guid: 73e91d004aaae9b4e9a2c150f53888c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 6438421735808348705}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6438421735810698009 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2373944, guid: 73e91d004aaae9b4e9a2c150f53888c3,
     type: 3}
   m_PrefabInstance: {fileID: 6438421735808348705}
   m_PrefabAsset: {fileID: 0}
