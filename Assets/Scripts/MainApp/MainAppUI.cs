@@ -20,6 +20,9 @@ public class MainAppUI : MonoBehaviour
     /// </summary>
     public PanelController ARTargetPanel;
 
+    /// <summary>
+    /// Confirmation panel just before starting the actual gameplay.
+    /// </summary>
     public PanelController startGamePanel;
 
     private void OnEnable()
@@ -71,11 +74,18 @@ public class MainAppUI : MonoBehaviour
         mainApp.AppAcknowledged();
     }
 
+    /// <summary>
+    /// Lets the app know the user decicided to start the game.
+    /// </summary>
     public void OnUserStartGame()
     {
         mainApp.StartGame();
     }
 
+    /// <summary>
+    /// Avoids waiting for the AR target to be found.
+    /// If it is alter found then the camera will move to the determined position.
+    /// </summary>
     public void SkipWaitingForARTarget()
     {
         mainApp.SkipWaitingForARTarget();
